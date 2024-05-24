@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); 
+  z-index: 1;
+}
+
+.image-wrapper img {
+  position: relative;
+  z-index: 0;
+}
+
+.bg-bg-auth {
+  background-color: #1E3A8A; /* Ganti dengan warna biru yang diinginkan */
+}
+
+.border-decor-auth {
+  border-color: #3B82F6; /* Ganti dengan warna border yang diinginkan */
+}
+
+.trapezoid {
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 60px solid #3B82F6; /* Warna biru trapesium */
+  position: absolute;
+  z-index: 10; /* Pastikan trapesium berada di atas */
+}
+
+.trapezoid::before {
+  content: '';
+  width: 200px;
+  height: 35px;
+  background-color: #1E3A8A; /* Warna kotak di bawah trapesium */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
