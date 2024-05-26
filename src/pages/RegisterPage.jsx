@@ -1,28 +1,30 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import LoginInput from '../components/LoginInput';
-import { Link } from 'react-router-dom';
-import { asyncSetAuthUser } from '../states/authUser/action';
+import RegisterInput from '../components/RegisterInput';
+import { Link, useNavigate } from 'react-router-dom';
+import { asyncRegisterUser } from '../states/users/action';
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onLogin = ({ email, password }) => {
-    dispatch(asyncSetAuthUser({ email, password }));
+  const onRegister = ({ name, email, password }) => {
+    dispatch(asyncRegisterUser({ name, email, password }));
+    navigate('/register')
   };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-cover" style={{'backgroundImage': "url('../pixel-night-wallpaper.png')"}}>
       <h1 className="font-sans text-3xl font-semibold absolute top-3 left-3 text-white">GameMaster</h1>
       <div className="bg-slate-800 boder border-slate-600 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-40 relative">
-        <LoginInput login={onLogin} />
+        <RegisterInput register={onRegister} />
         <p className='text-white'>
-          Don&apos;t have an account?{' '}
-          <Link to="/register" className='underline'>Register</Link>
+          Already have an account?{' '}
+          <Link to="/login" className='underline'>Login</Link>
         </p>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

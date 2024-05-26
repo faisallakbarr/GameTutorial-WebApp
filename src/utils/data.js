@@ -1,4 +1,4 @@
-const imageSlider = [
+const data = [
     {
         url: 'cs2-wallpaper.jpg',
         title: 'Mobile Legends',
@@ -16,4 +16,4 @@ const imageSlider = [
     }
 ]
 
-export default imageSlider;
+export default data;

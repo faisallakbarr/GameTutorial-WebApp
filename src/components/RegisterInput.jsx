@@ -1,21 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MdOutlineMailOutline } from "react-icons/md";
+import { IoPersonSharp } from "react-icons/io5";
 import { IoLockClosed } from "react-icons/io5";
 import useInput from '../hooks/useInput';
 
-const LoginInput = ({ login }) => {
+const RegisterInput = ({ register }) => {
+  const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
 
   return (
     <form className='flex flex-col'>
-      <h1 className='text-center text-white font-sans text-4xl font-bold pb-10 mt-3'>Login</h1>
+      <h1 className='text-center text-white font-sans text-4xl font-bold pb-10 mt-3'>Register</h1>
+      <div className='relative flex items-center'>
+        <IoPersonSharp className='absolute left-1 text-3xl pb-1 text-white active:border-transparent' />
+        <input 
+          className='py-1 pb-2 pl-10 pr-20 my-4 w-full focus:outline-none text-white bg-transparent border-b-2 border-white' 
+          type='text' 
+          value={name} 
+          onChange={onNameChange} 
+          placeholder='Name' 
+        />
+      </div>
       <div className='relative flex items-center'>
         <MdOutlineMailOutline className='absolute left-1 text-3xl pb-1 text-white active:border-transparent' />
         <input 
           className='py-1 pb-2 pl-10 pr-20 my-4 w-full focus:outline-none text-white bg-transparent border-b-2 border-white' 
-          type='text' 
+          type='email' 
           value={email} 
           onChange={onEmailChange} 
           placeholder='Email' 
@@ -33,17 +45,17 @@ const LoginInput = ({ login }) => {
       </div>
       <button 
         type='button' 
-        onClick={() => login({ email, password })}
+        onClick={() => register({ name, email, password })}
         className='bg-blue-500 text-white py-1 my-4 outline outline-blue-400 text-xl hover:bg-blue-700 hover:text-white rounded-md'
       >
-        Login
+        Register
       </button>
     </form>
   );
 }
 
-LoginInput.propTypes = {
-  login: PropTypes.func.isRequired,
+RegisterInput.propTypes = {
+  register: PropTypes.func.isRequired,
 };
 
-export default LoginInput;
+export default RegisterInput;
