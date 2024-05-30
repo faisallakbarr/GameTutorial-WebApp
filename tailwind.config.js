@@ -15,7 +15,11 @@ export default {
       'decor-auth': '#24AADE',
       'input-outline': '#2694c5',
       'logo-input': '#0071BD',
-      'decor-outline': '#29A8DA'
+      'decor-outline': '#29A8DA',
+      'home-bg': '#26282a',
+      'nav-hover': '#df324f',
+      'button1': '#e21d61',
+      'button2': '#e15026'
     },
     },
   },
