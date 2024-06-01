@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 import HomePage from './pages/HomePage';
+import VideoLibrary from './pages/VideoLibrary';
 
 const App = () => {
   const {
@@ -55,6 +56,7 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/*" element={<HomePage authUser={authUser} />} />
+            <Route path="/video" element={<VideoLibrary />} />
           </Routes>
         </main>
       </div>

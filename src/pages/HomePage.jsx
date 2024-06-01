@@ -3,6 +3,7 @@ import HeroBanner from '../components/HeroBanner';
 import GameList from '../components/GameList';
 import { useSearchParams } from 'react-router-dom';
 import { getGameData } from '../utils/game-data';
+import ActiveUsers from '../components/ActiveUsers';
 
 const HomePage = ({ authUser }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,13 +27,14 @@ const HomePage = ({ authUser }) => {
 
   return (
     <div className="text-2xl font-semibold">
-      <h1 className="m-4 text-center text-white">Welcome, {authUser.name}</h1>
+      <h1 className="m-4 pt-2 text-3xl text-center text-white">Welcome, {authUser.name}</h1>
       <HeroBanner />
       <h1 
       className="absolute bottom-0 text-center text-white mt-4"
-      style={{bottom: '415px' }}
+      style={{bottom: '405px' }}
       >Game For You To Choose</h1>
       <GameList games={filteredGames} />
+      <ActiveUsers />
     </div>
   );
 };

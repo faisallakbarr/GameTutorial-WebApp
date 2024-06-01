@@ -13,7 +13,7 @@ function Sidebar({ authUser, onSignOut }) {
     const { email, photo, name } = authUser;
     const Menus = [
         {title: "Home", icon: <IoMdHome />, link: "/"},
-        {title: "Video Library", icon: <MdVideoLibrary />, link: "/video-library"},
+        {title: "Video Library", icon: <MdVideoLibrary />, link: "/video"},
         {title: "Forum", icon: <MdForum />, link: "/forum", gap: true},
         {title: "Dark Mode", icon: <MdDarkMode />},
     ]

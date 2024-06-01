@@ -3,7 +3,10 @@ import React from 'react';
 
 const HeroBanner = () => {
   return (
-    <div className="absolute flex w-screen h-3/6 justify-start items-start">
+    <div 
+    className="absolute flex w-screen h-3/6 justify-start items-start"
+    style={{top: '85px' }}
+    >
       <img 
         src="/tournament-banner.jpg" 
         alt="tournament-banner" 

@@ -5,15 +5,14 @@ import { Link } from 'react-router-dom';
 const GameItem = ({ id, image }) => {
   return (
     <div 
-    className="relative bottom-0 text-center text-white mt-4"
-    style={{top: '450px' }}
-    >
+    className="relative bottom-0 text-center text-white mt-4" 
+    style={{ top: '460px' }}>
       <Link to={`/games/${id}`}>
         <img
           src={image}
           alt=""
-          className="object-cover w-full h-60 md:h-72 lg:h-80 rounded-lg"
-          style={{ maxHeight: '20rem' }} 
+          className="object-cover w-52 h-full md:h-72 lg:h-full rounded-lg"
+          style={{ maxHeight: '21rem' }} 
         />
       </Link>
     </div>
