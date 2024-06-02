@@ -19,7 +19,8 @@ export default {
       'home-bg': '#26282a',
       'nav-hover': '#df324f',
       'button1': '#e21d61',
-      'button2': '#e15026'
+      'button2': '#e15026',
+      'beginner': '#10b981'
     },
     },
   },

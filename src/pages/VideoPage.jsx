@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar'
 import VideoList from '../components/VideoList'
 
-const VideoLibrary = () => {
+const VideoPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [videos, setVideos] = useState([]);
   const [keyword, setKeyword] = useState(() => {
@@ -20,17 +20,22 @@ const VideoLibrary = () => {
     fetchGameData();
   }, []);
 
+  function onKeywordChangeHandler(keyword) {
+    setKeyword(keyword);
+    setSearchParams({ keyword });
+}
+
   const filteredVideos = videos.filter((video) => {
     return video.title.toLowerCase().includes(keyword.toLowerCase());
   });
         
 return (
     <div className='text-white m-8 '>
-      <h1 className='text-5xl font-bold'>Video Tutorials</h1>
-      <SearchBar />
+      <h1 className='text-4xl font-bold'>Video Tutorials</h1>
+      <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
       <VideoList videos={filteredVideos} />
     </div>
   )
 }
 
-export default VideoLibrary
+export default VideoPage

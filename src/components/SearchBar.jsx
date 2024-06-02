@@ -4,7 +4,7 @@ import { CiSearch } from "react-icons/ci";
 
 function SearchBar({ keyword, keywordChange }) {
     return (
-        <div className="flex justify-center mt-14">
+        <div className="flex justify-start mt-6">
         <div className="relative">
             <input
                 className="py-3 px-4 w-96 md:w-96 lg:w-96 bg-gray-700 text-white rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
