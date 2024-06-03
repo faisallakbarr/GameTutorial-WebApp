@@ -43,7 +43,7 @@ const ForumPage = () => {
       setSearchParams({ keyword });
   }
   
-    const filteredForum = talks.filter((talk) => {
+    const filteredForum = talkList.filter((talk) => {
       return talk.title.toLowerCase().includes(keyword.toLowerCase());
     });
 

@@ -23,40 +23,9 @@ const ForumItem = ({id, text, createdAt, likes, user, authUser, like}) => {
     }
 
   return (
-    <div role="button" tabIndex={0} className="talk-item" onClick={onForumClick} onKeyDown={onForumPress}>
-      <div className="talk-item__user-photo">
-        <img src={user.photo} alt={user} />
-      </div>
-      <div className="talk-item__detail">
-        <header>
-          <div className="talk-item__user-info">
-            <p className="talk-item__user-name">{user.name}</p>
-            <p className="text-white">Ini hanya tes</p>
-            <p className="talk-item__user-id">
-              @
-              {user.id}
-            </p>
-          </div>
-          <p className="talk-item__created-at">{postedAt(createdAt)}</p>
-        </header>
-        <article>
-          <p className="talk-item__text">{text}</p>
-        </article>
-        {
-          like && (
-            <div className="talk-item__likes">
-              <p>
-                <button type="button" aria-label="like" onClick={onLikeClick}>
-                  { isTalkLiked ? <FaHeart style={{ color: 'red' }} /> : <FaRegHeart />}
-                </button>
-                {' '}
-                {likes.length}
-              </p>
-            </div>
-          )
-        }
-      </div>
-    </div>
+    <div className='text-white'>
+      <h1>a</h1>
+    </div> 
   )
 }
 
