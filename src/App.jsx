@@ -12,22 +12,28 @@ import HomePage from './pages/HomePage';
 import VideoPage from './pages/VideoPage';
 import VideoDetailPage from './pages/VideoDetailPage';
 import ForumPage from './pages/ForumPage';
+import ForumAddPage from './pages/ForumAddPage';
+import { asyncAddTalk } from './states/talks/action';
 
 const App = () => {
   const {
     authUser = 'null',
     isPreload = false
-  } = useSelector((states) => states)
+  } = useSelector((states) => states);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(asyncPreloadProcess())
-  }, [dispatch])
+    dispatch(asyncPreloadProcess());
+  }, [dispatch]);
 
   const onSignOut = () => {
-    dispatch(asyncUnsetAuthUser())
-  }
+    dispatch(asyncUnsetAuthUser());
+  };
+
+  const onAddTalk = (text) => {
+    dispatch(asyncAddTalk({ text }));
+  };
 
   if (isPreload) {
     return null;
@@ -38,16 +44,15 @@ const App = () => {
       <>
         <Loading />
         <div>
-          <header>
-          </header>
+          <header></header>
           <Routes>
             <Route path="/*" element={<IntroPage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/register' element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
           </Routes>
         </div>
       </>
-    )
+    );
   }
 
   return (
@@ -61,12 +66,12 @@ const App = () => {
             <Route path="/video" element={<VideoPage />} />
             <Route path="/videos/:id" element={<VideoDetailPage />} />
             <Route path="/forum" element={<ForumPage />} />
+            <Route path="/forumAdd" element={<ForumAddPage onAddTalk={onAddTalk} />} />
           </Routes>
         </main>
       </div>
     </>
-  )
-
-}
+  );
+};
 
 export default App;
