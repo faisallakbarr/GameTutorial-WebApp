@@ -6,7 +6,8 @@ const api = (() => {
   }
 
   function getAccessToken() {
-    return localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken');
+    return token;
   }
 
   async function _fetchWithAuth(url, options = {}) {
@@ -23,17 +24,13 @@ const api = (() => {
     });
   }
 
-  async function register({ id, name, password }) {
-    const response = await fetch(`${BASE_URL}/users`, {
+  async function register({ name, email, password }) {
+    const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        id,
-        name,
-        password,
-      }),
+      body: JSON.stringify({ name, email, password }),
     });
 
     const responseJson = await response.json();
@@ -48,20 +45,16 @@ const api = (() => {
     return user;
   }
 
-  async function login({ id, password }) {
+  async function login({ email, password }) {
     const response = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        id,
-        password,
-      }),
+      body: JSON.stringify({ email, password }),
     });
 
     const responseJson = await response.json();
-
     const { status, message } = responseJson;
 
     if (status !== 'success') {
@@ -69,13 +62,15 @@ const api = (() => {
     }
 
     const { data: { token } } = responseJson;
-
+    putAccessToken(token); // Save the token for future requests
     return token;
   }
 
   async function getOwnProfile() {
     const response = await _fetchWithAuth(`${BASE_URL}/users/me`);
-
+    if (response.status === 401) {
+      throw new Error('Unauthorized');
+    }
     const responseJson = await response.json();
 
     const { status, message } = responseJson;
@@ -123,7 +118,6 @@ const api = (() => {
 
   async function getTalkDetail(id) {
     const response = await fetch(`${BASE_URL}/talks/${id}`);
-
     const responseJson = await response.json();
 
     const { status, message } = responseJson;
@@ -141,16 +135,12 @@ const api = (() => {
     const response = await _fetchWithAuth(`${BASE_URL}/talks`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        text,
-        replyTo,
-      }),
+      body: JSON.stringify({ text, replyTo })
     });
 
     const responseJson = await response.json();
-
     const { status, message } = responseJson;
 
     if (status !== 'success') {
@@ -158,7 +148,6 @@ const api = (() => {
     }
 
     const { data: { talk } } = responseJson;
-
     return talk;
   }
 
@@ -166,13 +155,10 @@ const api = (() => {
     const response = await _fetchWithAuth(`${BASE_URL}/talks/likes`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        talkId: id,
-      }),
+      body: JSON.stringify({ talkId: id })
     });
-
     const responseJson = await response.json();
 
     const { status, message } = responseJson;
@@ -190,9 +176,9 @@ const api = (() => {
     getOwnProfile,
     getAllUsers,
     getAllTalks,
-    createTalk,
-    toggleLikeTalk,
     getTalkDetail,
+    createTalk,
+    toggleLikeTalk
   };
 })();
 
