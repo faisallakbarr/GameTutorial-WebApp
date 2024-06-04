@@ -20,7 +20,7 @@ const GameDetailPage = () => {
   return (
     <div>
       <AutoPlayVideo trailer={game.trailer} />
-      <GameDetailInfo image={game.url} title={game.title} desc={game.description} />
+      <GameDetailInfo image={game.url} title={game.title} desc={game.description} webLink={game.webLink} download={game.download} />
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 
-const GameDetailInfo = ({ image, title, desc }) => {
+const GameDetailInfo = ({ image, title, desc, webLink, download }) => {
   return (
     <div className='relative text-white'>
     <img
@@ -30,13 +30,13 @@ const GameDetailInfo = ({ image, title, desc }) => {
         style={{ top: '80px', left: '700px'}} 
         >Watch Game Tutorial</button>
         </Link>
-        <a href='https://m.mobilelegends.com/' target='_blank'>
+        <a href={webLink} target='_blank'>
         <button
         className="relative w-96 text-sm px-3 py-2 bg-nav-hover"
         style={{ top: '190px', left: '-110px'}} 
         >Visit Official Website</button>
         </a>
-        <a href='https://play.google.com/store/apps/details?id=com.mobile.legends&hl=id' target='_blank'>
+        <a href={download} target='_blank'>
         <button
         className="relative text-sm px-5 py-5 bg-nav-hover"
         style={{ top: '190px', left: '-50px'}} 

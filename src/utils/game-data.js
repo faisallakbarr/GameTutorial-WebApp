@@ -24,7 +24,9 @@ const gameData = [
         developer: 'Moonton',
         platform: 'Android, iOS',
         picture: 'mlbb.jpg',
-        trailer: mlbb
+        trailer: mlbb,
+        webLink: 'https://m.mobilelegends.com/',
+        download: 'https://play.google.com/store/apps/details?id=com.mobile.legends&hl=id'
     },
     {
         url: valorantBanner,
@@ -34,7 +36,9 @@ const gameData = [
         developer: 'Riot Games',
         platform: 'PC',
         picture: 'valorant.jpg',
-        trailer: valorant
+        trailer: valorant,
+        webLink: 'https://playvalorant.com/',
+        download: 'https://playvalorant.com/en-us/download/'
     },
     {
         url: hokBanner,
@@ -44,7 +48,9 @@ const gameData = [
         developer: 'TiMi Studios',
         platform: 'Android, iOS',
         picture: 'hok.jpg',
-        trailer: hok
+        trailer: hok,
+        webLink: 'https://www.honorofkings.com/',
+        download: 'https://play.google.com/store/apps/details?id=com.tencent.tmgp.sgame&hl=id'
     },
     {
         url: cs2Banner,
@@ -54,7 +60,9 @@ const gameData = [
         developer: 'Valve Corporation',
         platform: 'PC',
         picture: 'cs2.jpg',
-        trailer: cs2
+        trailer: cs2,
+        webLink: 'https://www.counter-strike.net/cs2',
+        download: 'https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/'
     },
     {
         url: dota2Banner,
@@ -64,7 +72,9 @@ const gameData = [
         developer: 'Valve Corporation',
         platform: 'PC',
         picture: 'dota2.jpg',
-        trailer: dota2
+        trailer: dota2,
+        webLink: 'https://www.dota2.com/home',
+        download: 'https://store.steampowered.com/app/570/Dota_2/'
     },
     {
         url: lolBanner,
