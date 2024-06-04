@@ -9,6 +9,12 @@ import streetfighterBanner from '../assets/game-banner/streetfighter-banner.jpg'
 import eafc24Banner from '../assets/game-banner/eafc24-banner.jpg';
 import efootballBanner from '../assets/game-banner/efootball-banner.jpg';
 
+import mlbb from '../assets/trailer-videos/mlbb-trailer.mp4'
+import valorant from '../assets/trailer-videos/valorant-trailer.mp4'
+import hok from '../assets/trailer-videos/hok-trailer.mp4'
+import cs2 from '../assets/trailer-videos/cs2-trailer.mp4'
+import dota2 from '../assets/trailer-videos/dota2-trailer.mp4'
+
 const gameData = [
     {
         url: mlbbBanner,
@@ -17,7 +23,8 @@ const gameData = [
         releaseDate: 'July 11, 2016',
         developer: 'Moonton',
         platform: 'Android, iOS',
-        picture: 'mlbb.jpg'
+        picture: 'mlbb.jpg',
+        trailer: mlbb
     },
     {
         url: valorantBanner,
@@ -26,7 +33,8 @@ const gameData = [
         releaseDate: 'June 2, 2020',
         developer: 'Riot Games',
         platform: 'PC',
-        picture: 'valorant.jpg'
+        picture: 'valorant.jpg',
+        trailer: valorant
     },
     {
         url: hokBanner,
@@ -35,7 +43,8 @@ const gameData = [
         releaseDate: 'November 26, 2015',
         developer: 'TiMi Studios',
         platform: 'Android, iOS',
-        picture: 'hok.jpg'
+        picture: 'hok.jpg',
+        trailer: hok
     },
     {
         url: cs2Banner,
@@ -44,7 +53,8 @@ const gameData = [
         releaseDate: '22 August 2012',
         developer: 'Valve Corporation',
         platform: 'PC',
-        picture: 'cs2.jpg'
+        picture: 'cs2.jpg',
+        trailer: cs2
     },
     {
         url: dota2Banner,
@@ -53,7 +63,8 @@ const gameData = [
         releaseDate: 'July 9, 2013',
         developer: 'Valve Corporation',
         platform: 'PC',
-        picture: 'dota2.jpg'
+        picture: 'dota2.jpg',
+        trailer: dota2
     },
     {
         url: lolBanner,

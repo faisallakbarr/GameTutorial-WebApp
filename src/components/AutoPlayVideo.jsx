@@ -1,11 +1,10 @@
 import React from 'react'
-import mlbb from '../assets/trailer-videos/mlbb-trailer.mp4'
 
-const AutoPlayVideo = () => {
+const AutoPlayVideo = ({trailer}) => {
   return (
     <div className='h-screen absolute'>
       <video 
-      src={mlbb}
+      src={trailer}
       autoPlay
       loop
       className='w-screen h-4/6 object-cover'

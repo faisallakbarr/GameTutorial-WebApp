@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import GameItem from './GameItem';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { motion } from 'framer-motion';
+
 
 const GameList = ({ games }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,7 +34,7 @@ const GameList = ({ games }) => {
     className="absolute bottom-0 right-0 text-white mt-4 border-2 px-2 py-2 rounded-full"
     style={{bottom: '395px', right: '280px' }}
     ><MdOutlineKeyboardArrowRight /></button>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+    <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
     {displayedGames.map((game) => (
       <GameItem 
         key={game.id}
@@ -41,7 +43,7 @@ const GameList = ({ games }) => {
         title={game.title}
       />
     ))}
-    </div>
+    </motion.div>
     </>
   );
 };

@@ -4,6 +4,12 @@ import GameList from '../components/GameList';
 import { useSearchParams } from 'react-router-dom';
 import { getGameData } from '../utils/game-data';
 import ActiveUsers from '../components/ActiveUsers';
+import { motion } from 'framer-motion';
+import {
+  slideInFromLeft,
+  slideInFromRight,
+  slideInFromTop,
+} from "../utils/motion";
 
 const HomePage = ({ authUser }) => {
   const [searchParams, setSearchParams] = useSearchParams();
