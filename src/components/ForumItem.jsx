@@ -5,6 +5,7 @@ import { postedAt } from '../utils';
 
 const ForumItem = ({id, text, createdAt, likes, user, authUser, like}) => {
     const navigate = useNavigate();
+    console.log("ForumItem props: ", { id, text, like });
     const isTalkLiked = likes.includes(authUser);
 
     const onLikeClick = (event) => {

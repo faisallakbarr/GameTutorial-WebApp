@@ -109,4 +109,9 @@ const getGameData = () => {
     }));
 };
 
-export { getGameData };
+const getGameById = (id) => {
+    const videos = getGameData();
+    return videos.find(video => video.id === parseInt(id));
+};
+
+export { getGameData, getGameById };

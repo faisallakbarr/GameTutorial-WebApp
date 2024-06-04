@@ -8,7 +8,7 @@ function asyncPopulateUsersAndTalks() {
     dispatch(showLoading());
     try {
       const users = await api.getAllUser();
-      const talks = await api.getALlTalks();
+      const talks = await api.getAllTalks();
 
       dispatch(receiveUsersActionCreator(users));
       dispatch(receiveTalksActionCreator(talks));

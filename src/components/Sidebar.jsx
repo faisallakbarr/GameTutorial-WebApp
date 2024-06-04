@@ -20,7 +20,7 @@ function Sidebar({ authUser, onSignOut }) {
 
     return (
         <div 
-        className="w-72 duration-300 h-screen bg-home-bg text-white pt-8 bg-relative"
+        className="min-w-72 duration-300 h-screen bg-home-bg text-white pt-8 bg-relative"
         >
             <h1 className="text-4xl text-center font-bold mb-9">Game<br />Master</h1>
         <div className="flex gap-x-4 items-center m-9">

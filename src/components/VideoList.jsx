@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import VideoItem from './VideoItem';
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const VideoList = ({ videos }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,12 +24,12 @@ const VideoList = ({ videos }) => {
     <div>
       <button
       onClick={handlePrev}
-      className='text-3xl border-2 mt-2 px-2 rounded-full'
-      >a</button>
+      className='text-3xl border-2 mt-2 rounded-full'
+      ><MdOutlineKeyboardArrowLeft /></button>
       <button
       onClick={handleNext}
-      className='text-3xl border-2 mt-2 ml-2 px-2 rounded-full'
-      >d</button>
+      className='text-3xl border-2 mt-2 ml-2 rounded-full'
+      ><MdOutlineKeyboardArrowRight /></button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 gap-y-1">
       {displayedVideos.map((video) => (
       <VideoItem
@@ -39,11 +40,12 @@ const VideoList = ({ videos }) => {
       desc={video.desc}
       duration={video.duration}
       videos={video.videos}
+      img={video.img}
       />
     ))}
+    
     </div>
     </div>
   )
 }
-
 export default VideoList

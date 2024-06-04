@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ForumItem from './ForumItem';
 import { Link } from 'react-router-dom';
+import { FaRegPlusSquare } from "react-icons/fa";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const ForumList = ({ talks, like }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,16 +25,17 @@ const ForumList = ({ talks, like }) => {
 
   return (
     <div>
+    <div className='flex'>
+    <button
+      onClick={handlePrev}
+      className='text-3xl border-2 px-1 mt-2 rounded-full'
+      ><MdOutlineKeyboardArrowLeft /></button>
       <button
-        onClick={handlePrev}
-        className='text-3xl border-2 mt-2 px-2 rounded-full'
-      >a</button>
-      <button
-        onClick={handleNext}
-        className='text-3xl border-2 mt-2 ml-2 px-2 rounded-full'
-      >d</button>
-      <Link to='/forumAdd' className='text-white'>Add Talk</Link>
-
+      onClick={handleNext}
+      className='text-3xl border-2 px-1 mt-2 ml-2 rounded-full'
+      ><MdOutlineKeyboardArrowRight /></button>
+      <Link to='/forumAdd' className='text-white text-5xl pl-4'><FaRegPlusSquare className='pt-2' /></Link>
+</div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 gap-y-1">
         {displayedForum.length > 0 ? (
           displayedForum.map((talk) => (

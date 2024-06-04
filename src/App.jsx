@@ -14,6 +14,7 @@ import VideoDetailPage from './pages/VideoDetailPage';
 import ForumPage from './pages/ForumPage';
 import ForumAddPage from './pages/ForumAddPage';
 import { asyncAddTalk } from './states/talks/action';
+import GameDetailPage from './pages/GameDetailPage';
 
 const App = () => {
   const {
@@ -63,6 +64,7 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/*" element={<HomePage authUser={authUser} />} />
+            <Route path="/games/:id" element={<GameDetailPage />} />
             <Route path="/video" element={<VideoPage />} />
             <Route path="/videos/:id" element={<VideoDetailPage />} />
             <Route path="/forum" element={<ForumPage />} />

@@ -8,7 +8,12 @@ import ForumList from '../components/ForumList';
 
 const ForumPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { talks = [], users = [], authUser } = useSelector((states) => states);
+    const { 
+        talks = [], 
+        users = [], 
+        authUser } 
+    = useSelector((states) => states);
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
