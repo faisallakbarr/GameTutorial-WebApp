@@ -18,7 +18,7 @@ import GameDetailPage from './pages/GameDetailPage';
 
 const App = () => {
   const {
-    authUser = 'null',
+    authUser = null,
     isPreload = false
   } = useSelector((states) => states);
 

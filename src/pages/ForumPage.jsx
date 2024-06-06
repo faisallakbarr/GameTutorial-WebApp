@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import { asyncPopulateUsersAndTalks } from '../states/shared/action';
-import { asyncToggleLikeTalk } from '../states/talks/action';
+import { asyncToggleLikeTalk, asyncAddTalk } from '../states/talks/action';
 import ForumList from '../components/ForumList';
+
 
 const ForumPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,6 +20,10 @@ const ForumPage = () => {
     useEffect(() => {
         dispatch(asyncPopulateUsersAndTalks());
     }, [dispatch]);
+
+    const onAddForum = (text) => {
+        dispatch(asyncAddTalk({ text }));
+    }
 
     const onLike = (id) => {
         dispatch(asyncToggleLikeTalk({ id }));

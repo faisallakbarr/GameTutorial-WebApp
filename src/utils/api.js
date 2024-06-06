@@ -100,65 +100,90 @@ const api = (() => {
     return users;
   }
 
-  async function getAllTalks() {
-    const response = await fetch(`${BASE_URL}/talks`);
-
-    const responseJson = await response.json();
-
-    const { status, message } = responseJson;
-
-    if (status !== 'success') {
-      throw new Error(message);
-    }
-
-    const { data: { talks } } = responseJson;
-
-    return talks;
-  }
-
-  async function getTalkDetail(id) {
-    const response = await fetch(`${BASE_URL}/talks/${id}`);
-    const responseJson = await response.json();
-
-    const { status, message } = responseJson;
-
-    if (status !== 'success') {
-      throw new Error(message);
-    }
-
-    const { data: { talkDetail } } = responseJson;
-
-    return talkDetail;
-  }
-
-  async function createTalk({ text, replyTo = '' }) {
-    const response = await _fetchWithAuth(`${BASE_URL}/talks`, {
+  async function createThread({ title, body, category }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ text, replyTo })
+      body: JSON.stringify({ title, body, category }),
     });
 
     const responseJson = await response.json();
+
     const { status, message } = responseJson;
 
     if (status !== 'success') {
       throw new Error(message);
     }
 
-    const { data: { talk } } = responseJson;
-    return talk;
+    const { data: { thread } } = responseJson;
+
+    return thread;
   }
 
-  async function toggleLikeTalk(id) {
-    const response = await _fetchWithAuth(`${BASE_URL}/talks/likes`, {
+  async function getAllThreads() {
+    const response = await fetch(`${BASE_URL}/threads`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { threads } } = responseJson;
+
+    return threads;
+  }
+
+  async function getThreadById(threadId) {
+    const response = await fetch(`${BASE_URL}/threads/${threadId}`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { detailThread } } = responseJson;
+
+    return detailThread;
+  }
+
+  async function createComment({ threadId, content}) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments`, {
+      methodd: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ content }),
+    })
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { comment } } = responseJson;
+
+    return comment;
+  }
+
+  async function upVoteThread(threadId) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/up-vote`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ talkId: id })
     });
+    
     const responseJson = await response.json();
 
     const { status, message } = responseJson;
@@ -168,17 +193,136 @@ const api = (() => {
     }
   }
 
+  async function downVoteThread(threadId) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  }
+
+  async function neutralizeThreadVote(threadId) {
+    const response = await _fetchWithAuth(`${BASE_URL}/comments/${threadId}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  }
+
+  async function upVoteComment({commentId, threadId}) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { vote } } = responseJson;
+
+    return vote;
+  }
+
+  async function downVoteComment({commentId, threadId}) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { vote } } = responseJson;
+
+    return vote;
+  }
+
+  async function neutralizeCommentVote({commentId, threadId}) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { vote } } = responseJson;
+
+    return vote;
+  }
+
+  async function getLeaderboards() {
+    const response = await fetch(`${BASE_URL}/leaderboards`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { leaderboards } } = responseJson;
+
+    return leaderboards;
+  }
   return {
-    putAccessToken,
-    getAccessToken,
-    register,
     login,
-    getOwnProfile,
+    register,
+    getAllThreads,
+    getThreadById,
+    createThread,
+    createComment,
+    upVoteThread,
+    downVoteThread,
+    neutralizeThreadVote,
+    upVoteComment,
+    downVoteComment,
+    neutralizeCommentVote,
+    getLeaderboards,
+    getAccessToken,
+    putAccessToken,
     getAllUsers,
-    getAllTalks,
-    getTalkDetail,
-    createTalk,
-    toggleLikeTalk
+    getOwnProfile,
   };
 })();
 
