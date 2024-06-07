@@ -2,16 +2,23 @@ import React from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { postedAt } from '../utils';
+import ForumVote from './ForumVote';
 
-const ForumItem = ({id, text, createdAt, likes = [], user = {}, authUser, like}) => {
+const ForumItem = ({
+  id, 
+  title, 
+  body, 
+  category, 
+  createdAt, 
+  upVotesBy,
+   downVotesBy, 
+   totalComments, 
+   upVote, 
+   downVote, 
+   neutralizeVote, 
+   user, 
+   authUser}) => {
     const navigate = useNavigate();
-    console.log("ForumItem props: ", { id, text, like });
-    const isTalkLiked = likes.includes(authUser);
-
-    const onLikeClick = (event) => {
-        event.stopPropagation();
-        like(id);
-    };
 
     const onForumClick = () => {
         navigate(`/forum/${id}`);
@@ -24,41 +31,47 @@ const ForumItem = ({id, text, createdAt, likes = [], user = {}, authUser, like})
     };
 
     return (
-      <div className='text-white'>
-      <div role="button" tabIndex={0} className="talk-item" onClick={onForumClick} onKeyDown={onForumPress}>
-      <div className="talk-item__user-photo">
-        <img src={user.photo} alt={user.name} />
-      </div>
-      <div className="talk-item__detail">
-        <header>
-          <div className="talk-item__user-info">
-            <p className="talk-item__user-name">{user.name}</p>
-            <p className="talk-item__user-id">
-              @
-              {user.id}
-            </p>
+      <div className="text-white mt-3 border-2 w-full ">
+      <header>
+        <span className="rounded-lg px-4 py-1 bg-blue-300 text-lg">
+          #{category}
+        </span>
+        <h1 className="mt-5">
+          <div
+            tabIndex={0}
+            role="button"
+            className="cursor-pointer font-bold text-2xl hover:text-blue-400"
+            onClick={onForumClick}
+            onKeyDown={onForumPress}
+          >
+            {title}
           </div>
-          <p className="talk-item__created-at">{postedAt(createdAt)}</p>
-        </header>
-        <article>
-          <p className="talk-item__text">{text}</p>
-        </article>
-        {
-          like && (
-            <div className="talk-item__likes">
-              <p>
-                <button type="button" aria-label="like" onClick={onLikeClick}>
-                  { isTalkLiked ? <FaHeart style={{ color: 'red' }} /> : <FaRegHeart />}
-                </button>
-                {' '}
-                {likes.length}
-              </p>
-            </div>
-          )
-        }
+        </h1>
+      </header>
+      <div className='overflow-hidden truncate mt-3'>
+        {body}
       </div>
+      <footer className="flex flex-row mb-2 gap-5 items-center p-1">
+        <ForumVote 
+        id={id}
+        authUser={authUser}
+        upVote={upVote}
+        downVote={downVote}
+        neutralizeVote={neutralizeVote}
+        upVotesBy={upVotesBy}
+        downVotesBy={downVotesBy}
+        />
+        <span className="flex items-center gap-2">
+        
+        </span>
+        <span>
+          {postedAt(createdAt)}
+        </span>
+        <span>
+          Dibuat oleh <strong>{user.name}</strong>
+        </span>
+      </footer>
     </div>
-      </div>
     );
 };
 

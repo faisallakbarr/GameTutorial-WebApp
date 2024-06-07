@@ -13,8 +13,9 @@ import VideoPage from './pages/VideoPage';
 import VideoDetailPage from './pages/VideoDetailPage';
 import ForumPage from './pages/ForumPage';
 import ForumAddPage from './pages/ForumAddPage';
-import { asyncAddTalk } from './states/talks/action';
+import { asyncCreateTalk } from './states/talks/action';
 import GameDetailPage from './pages/GameDetailPage';
+import ForumDetailPage from './pages/ForumDetailPage';
 
 const App = () => {
   const {
@@ -30,10 +31,6 @@ const App = () => {
 
   const onSignOut = () => {
     dispatch(asyncUnsetAuthUser());
-  };
-
-  const onAddTalk = (text) => {
-    dispatch(asyncAddTalk({ text }));
   };
 
   if (isPreload) {
@@ -68,7 +65,8 @@ const App = () => {
             <Route path="/video" element={<VideoPage />} />
             <Route path="/videos/:id" element={<VideoDetailPage />} />
             <Route path="/forum" element={<ForumPage />} />
-            <Route path="/forumAdd" element={<ForumAddPage onAddTalk={onAddTalk} />} />
+            <Route path="/forum/:id" element={<ForumDetailPage />} />
+            <Route path="/forumAdd" element={<ForumAddPage />} />
           </Routes>
         </main>
       </div>

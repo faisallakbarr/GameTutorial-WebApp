@@ -3,8 +3,10 @@ import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_TALKS: 'RECEIVE_TALKS',
-  ADD_TALK: 'ADD_TALK',
-  TOGGLE_LIKE_TALK: 'TOGGLE_LIKE_TALK',
+  CREATE_TALK: 'CREATE_TALK',
+  UP_VOTE_TALK: 'UP_VOTE_TALK',
+  DOWN_VOTE_TALK: 'DOWN_VOTE_TALK',
+  NEUTRALIZE_VOTE_TALK: 'NEUTRALIZE_VOTE_TALK',
 };
 
 function receiveTalksActionCreator(talks) {
@@ -16,18 +18,18 @@ function receiveTalksActionCreator(talks) {
   };
 }
 
-function addTalkActionCreator(talk) {
+function createTalkActionCreator(talk) {
   return {
-    type: ActionType.ADD_TALK,
+    type: ActionType.CREATE_TALK,
     payload: {
       talk,
     },
   };
 }
 
-function toggleLikeTalkActionCreator({ talkId, userId }) {
+function upVoteTalkActionCreator({ talkId, userId }) {
   return {
-    type: ActionType.TOGGLE_LIKE_TALK,
+    type: ActionType.UP_VOTE_TALK,
     payload: {
       talkId,
       userId,
@@ -35,12 +37,33 @@ function toggleLikeTalkActionCreator({ talkId, userId }) {
   };
 }
 
-function asyncAddTalk({ text, replyTo = '' }) {
+function downVoteTalkActionCreator({ talkId, userId }) {
+  return {
+    type: ActionType.DOWN_VOTE_TALK,
+    payload: {
+      talkId,
+      userId,
+    },
+  };
+}
+
+function neutralizeVoteTalkActionCreator({ talkId, userId }) {
+  return {
+    type: ActionType.NEUTRALIZE_VOTE_TALK,
+    payload: {
+      talkId,
+      userId,
+    },
+  };
+}
+
+// thunk
+function asyncCreateTalk({ title, body, category }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      const talk = await api.createTalk({ text, replyTo });
-      dispatch(addTalkActionCreator(talk));
+      const talk = await api.createTalk({ title, body, category });
+      dispatch(createTalkActionCreator(talk));
     } catch (error) {
       alert(error.message);
     }
@@ -48,27 +71,57 @@ function asyncAddTalk({ text, replyTo = '' }) {
   };
 }
 
-function asyncToggleLikeTalk(talkId) {
+function asyncUpVoteTalk(talkId) {
   return async (dispatch, getState) => {
-    dispatch(showLoading());
     const { authUser } = getState();
-    dispatch(toggleLikeTalkActionCreator({ talkId, userId: authUser.id }));
+    dispatch(upVoteTalkActionCreator({ talkId, userId: authUser.id }));
 
     try {
-      await api.toggleLikeTalk(talkId);
+      await api.upVoteTalk(talkId);
     } catch (error) {
       alert(error.message);
-      dispatch(toggleLikeTalkActionCreator({ talkId, userId: authUser.id }));
+      dispatch(downVoteTalkActionCreator({ talkId, userId: authUser.id }));
     }
-    dispatch(hideLoading());
+  };
+}
+
+function asyncDownVoteTalk(talkId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(downVoteTalkActionCreator({ talkId, userId: authUser.id }));
+
+    try {
+      await api.downVoteTalk(talkId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(downVoteTalkActionCreator({ talkId, userId: authUser.id }));
+    }
+  };
+}
+
+function asyncNeutralizeVoteTalk(talkId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(
+      neutralizeVoteTalkActionCreator({ talkId, userId: authUser.id }),
+    );
+
+    try {
+      await api.neutralizeTalkVote(talkId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(
+        neutralizeVoteTalkActionCreator({ talkId, userId: authUser.id }),
+      );
+    }
   };
 }
 
 export {
   ActionType,
   receiveTalksActionCreator,
-  addTalkActionCreator,
-  toggleLikeTalkActionCreator,
-  asyncAddTalk,
-  asyncToggleLikeTalk,
+  asyncCreateTalk,
+  asyncUpVoteTalk,
+  asyncDownVoteTalk,
+  asyncNeutralizeVoteTalk,
 };

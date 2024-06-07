@@ -100,7 +100,7 @@ const api = (() => {
     return users;
   }
 
-  async function createThread({ title, body, category }) {
+  async function createTalk({ title, body, category }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
       method: 'POST',
       headers: {
@@ -176,7 +176,7 @@ const api = (() => {
     return comment;
   }
 
-  async function upVoteThread(threadId) {
+  async function upVoteTalk(threadId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/up-vote`, {
       method: 'POST',
       headers: {
@@ -193,7 +193,7 @@ const api = (() => {
     }
   }
 
-  async function downVoteThread(threadId) {
+  async function downVoteTalk(threadId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/down-vote`, {
       method: 'POST',
       headers: {
@@ -210,8 +210,8 @@ const api = (() => {
     }
   }
 
-  async function neutralizeThreadVote(threadId) {
-    const response = await _fetchWithAuth(`${BASE_URL}/comments/${threadId}/neutral-vote`, {
+  async function neutralizeTalkVote(threadId) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/neutral-vote`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -310,11 +310,11 @@ const api = (() => {
     register,
     getAllThreads,
     getThreadById,
-    createThread,
+    createTalk,
     createComment,
-    upVoteThread,
-    downVoteThread,
-    neutralizeThreadVote,
+    upVoteTalk,
+    downVoteTalk,
+    neutralizeTalkVote,
     upVoteComment,
     downVoteComment,
     neutralizeCommentVote,

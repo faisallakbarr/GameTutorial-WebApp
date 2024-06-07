@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaRegPlusSquare } from "react-icons/fa";
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-const ForumList = ({ talks, like }) => {
+const ForumList = ({ talks, upVote, downVote, neutralizeVote }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 6;
 
@@ -42,7 +42,9 @@ const ForumList = ({ talks, like }) => {
             <ForumItem 
               key={talk.id}
               {...talk}
-              like={like}
+              upVote={upVote}
+              downVote={downVote}
+              neutralizeVote={neutralizeVote}
             />
           ))
         ) : (

@@ -1,43 +1,52 @@
 import React, { useState } from 'react';
+import useInput from '../hooks/useInput';
 
 const ForumInput = ({ addTalk }) => {
-    const [text, setText] = useState('');
+    const [title, onTitleChange] = useInput('');
+    const [category, onCategoryChange] = useInput('');
+    const [body, setBody] = useState('');
 
-    function addtalk() {
-        if (text.trim()) {
-            addTalk(text);
-            setText('');
-        }
-    }
+    function onInputBody(e) {
+    setBody(e.target.innerHTML);
+  }
 
-    function handleTextChange({ target }) {
-        if (target.value.length <= 320) {
-            setText(target.value);
-        }
-    }
+  function onSubmit(e) {
+    e.preventDefault();
+    addTalk({ title, category, body });
+  }
 
     return (
-        <div className="flex justify-center items-center w-5/6">
-            <div className="w-screen max-w-2xl mx-auto text-center mt-6">
-                <textarea
-                    type="text"
-                    placeholder="Tell everybody what do you think..."
-                    value={text}
-                    onChange={handleTextChange}
-                    className="mt-6 w-full h-56 text-black p-4 border rounded-lg resize-none"
-                />
-                <p className="mt-2">
-                    <strong>{text.length}</strong>/320
-                </p>
-                <button
-                    type="submit"
-                    onClick={addtalk}
-                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                >
-                    Submit
-                </button>
-            </div>
-        </div>
+        <form className="flex flex-col gap-2 w-96 mt-6 text-black" onSubmit={onSubmit}>
+      <input
+        className="p-1 px-3 rounded-xl"
+        type="text"
+        placeholder="Title"
+        name="title"
+        value={title}
+        onChange={onTitleChange}
+      />
+      <input
+        className="p-1 px-3 rounded-xl"
+        type="text"
+        placeholder="Category"
+        name="category"
+        value={category}
+        onChange={onCategoryChange}
+        required
+      />
+      <div
+        className="w-full min-h-60 border border-slate-200 outline-none p-1 rounded-xl focus:ring-1 focus:ring-primary bg-white"
+        value={body}
+        onInput={onInputBody}
+        contentEditable
+      />
+      <button
+        className="bg-blue-300 px-5 py-2 rounded-xl hover:bg-blue-700 mt-4 w-full"
+        type="submit"
+      >
+        Post
+      </button>
+    </form>
     );
 }
 

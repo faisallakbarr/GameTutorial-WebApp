@@ -3,35 +3,44 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import { asyncPopulateUsersAndTalks } from '../states/shared/action';
-import { asyncToggleLikeTalk, asyncAddTalk } from '../states/talks/action';
+import { asyncCreateTalk } from '../states/talks/action';
+import {
+    asyncUpVoteTalk,
+    asyncDownVoteTalk,
+    asyncNeutralizeVoteTalk,
+  } from '../states/talks/action';
 import ForumList from '../components/ForumList';
 
 
 const ForumPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { 
-        talks = [], 
-        users = [], 
-        authUser } 
-    = useSelector((states) => states);
+    const talks = useSelector((state) => state.talks);
+    const users = useSelector((state) => state.users);
+    const authUser = useSelector((state) => state.authUser);
     
     const dispatch = useDispatch();
+
+    const categories = new Set(talks.map((talk) => talk.category));
 
     useEffect(() => {
         dispatch(asyncPopulateUsersAndTalks());
     }, [dispatch]);
-
-    const onAddForum = (text) => {
-        dispatch(asyncAddTalk({ text }));
-    }
-
-    const onLike = (id) => {
-        dispatch(asyncToggleLikeTalk({ id }));
-    };
+    
+    const onUpVoteThread = (id) => {
+        dispatch(asyncUpVoteTalk(id));
+      };
+    
+      const onDownVoteThread = (id) => {
+        dispatch(asyncDownVoteTalk(id));
+      };
+    
+      const onNeutralizeVoteThread = (id) => {
+        dispatch(asyncNeutralizeVoteTalk(id));
+      };
 
     const talkList = talks.map((talk) => ({
         ...talk,
-        user: users.find((user) => user.id === talk.user),
+        user: users.find((user) => user.id === talk.ownerId),
         authUser: authUser.id,
     }));
 
@@ -52,7 +61,7 @@ const ForumPage = () => {
         <div className='text-white m-8 '>
             <h1 className='text-4xl font-bold'>Forum</h1>
             <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-            <ForumList talks={filteredForum} like={onLike} />
+            <ForumList talks={filteredForum} upVote={onUpVoteThread} downVote={onDownVoteThread} neutralizeVote={onNeutralizeVoteThread} />
         </div>
     );
 };
