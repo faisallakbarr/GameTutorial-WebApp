@@ -6,7 +6,7 @@ import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-i
 
 const ForumList = ({ talks, upVote, downVote, neutralizeVote }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 6;
+  const itemsPerPage = 9;
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>

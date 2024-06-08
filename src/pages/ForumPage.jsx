@@ -3,18 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import { asyncPopulateUsersAndTalks } from '../states/shared/action';
-import { asyncCreateTalk } from '../states/talks/action';
+import { asyncCreateTalk } from '../states/threads/action';
 import {
     asyncUpVoteTalk,
     asyncDownVoteTalk,
     asyncNeutralizeVoteTalk,
-  } from '../states/talks/action';
+  } from '../states/threads/action';
 import ForumList from '../components/ForumList';
 
 
 const ForumPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const talks = useSelector((state) => state.talks);
+    const talks = useSelector((state) => state.threads);
     const users = useSelector((state) => state.users);
     const authUser = useSelector((state) => state.authUser);
     

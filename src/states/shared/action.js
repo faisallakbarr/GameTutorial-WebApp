@@ -1,6 +1,6 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
-import { receiveTalksActionCreator } from '../talks/action';
+import { receiveTalksActionCreator } from '../threads/action';
 import { receiveUsersActionCreator } from '../users/action';
 
 function asyncPopulateUsersAndTalks() {

@@ -13,7 +13,7 @@ import VideoPage from './pages/VideoPage';
 import VideoDetailPage from './pages/VideoDetailPage';
 import ForumPage from './pages/ForumPage';
 import ForumAddPage from './pages/ForumAddPage';
-import { asyncCreateTalk } from './states/talks/action';
+import { asyncCreateTalk } from './states/threads/action';
 import GameDetailPage from './pages/GameDetailPage';
 import ForumDetailPage from './pages/ForumDetailPage';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { asyncCreateTalk } from '../states/talks/action';
+import { asyncCreateTalk } from '../states/threads/action';
 import ForumInput from '../components/ForumInput';
 
 const ForumAddPage = () => {

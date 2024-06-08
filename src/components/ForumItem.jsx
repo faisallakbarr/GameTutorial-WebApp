@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import { BsChatLeftDots } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { postedAt } from '../utils';
 import ForumVote from './ForumVote';
@@ -31,7 +32,7 @@ const ForumItem = ({
     };
 
     return (
-      <div className="text-white mt-3 border-2 w-full ">
+      <div className="text-white mt-3 border-2 w-full min-h-56 max-h-56">
       <header>
         <span className="rounded-lg px-4 py-1 bg-blue-300 text-lg">
           #{category}
@@ -62,7 +63,7 @@ const ForumItem = ({
         downVotesBy={downVotesBy}
         />
         <span className="flex items-center gap-2">
-        
+        <BsChatLeftDots /> {totalComments}
         </span>
         <span>
           {postedAt(createdAt)}
