@@ -1,6 +1,6 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
-
+ 
 const ActionType = {
   RECEIVE_THREAD_DETAIL: 'RECEIVE_THREAD_DETAIL',
   UP_VOTE_THREAD_DETAIL: 'UP_VOTE_THREAD_DETAIL',
@@ -11,7 +11,7 @@ const ActionType = {
   DOWN_VOTE_COMMENT: 'DOWN_VOTE_COMMENT',
   NEUTRALIZE_VOTE_COMMENT: 'NEUTRALIZE_VOTE_COMMENT',
 };
-
+ 
 function receiveThreadDetailActionCreator(detailThread) {
   return {
     type: ActionType.RECEIVE_THREAD_DETAIL,
@@ -20,7 +20,7 @@ function receiveThreadDetailActionCreator(detailThread) {
     },
   };
 }
-
+ 
 function upVoteThreadDetailActionCreator(userId) {
   return {
     type: ActionType.UP_VOTE_THREAD_DETAIL,
@@ -29,7 +29,7 @@ function upVoteThreadDetailActionCreator(userId) {
     },
   };
 }
-
+ 
 function downVoteThreadDetailActionCreator(userId) {
   return {
     type: ActionType.DOWN_VOTE_THREAD_DETAIL,
@@ -38,7 +38,7 @@ function downVoteThreadDetailActionCreator(userId) {
     },
   };
 }
-
+ 
 function neutralizeVoteThreadDetailActionCreator(userId) {
   return {
     type: ActionType.NEUTRALIZE_VOTE_THREAD_DETAIL,
@@ -47,7 +47,7 @@ function neutralizeVoteThreadDetailActionCreator(userId) {
     },
   };
 }
-
+ 
 function createCommentActionCreator(comment) {
   return {
     type: ActionType.CREATE_COMMENT,
@@ -56,7 +56,7 @@ function createCommentActionCreator(comment) {
     },
   };
 }
-
+ 
 function upVoteCommentActionCreator(commentId, userId) {
   return {
     type: ActionType.UP_VOTE_COMMENT,
@@ -66,7 +66,7 @@ function upVoteCommentActionCreator(commentId, userId) {
     },
   };
 }
-
+ 
 function downVoteCommentActionCreator(commentId, userId) {
   return {
     type: ActionType.DOWN_VOTE_COMMENT,
@@ -76,7 +76,7 @@ function downVoteCommentActionCreator(commentId, userId) {
     },
   };
 }
-
+ 
 function neutralizeVoteCommentActionCreator(commentId, userId) {
   return {
     type: ActionType.NEUTRALIZE_VOTE_COMMENT,
@@ -86,12 +86,12 @@ function neutralizeVoteCommentActionCreator(commentId, userId) {
     },
   };
 }
-
+ 
 // thunk
 function asyncReceiveThreadDetail(threadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-
+ 
     try {
       const threadDetail = await api.getThreadById(threadId);
       dispatch(receiveThreadDetailActionCreator(threadDetail));
@@ -101,63 +101,63 @@ function asyncReceiveThreadDetail(threadId) {
     dispatch(hideLoading());
   };
 }
-
-
+ 
+ 
 function asyncUpVoteThreadDetail() {
   return async (dispatch, getState) => {
-    const { threadDetail, authUser } = getState();
-    console.log('asyncUpVoteThreadDetail called with threadDetail:', threadDetail, 'and authUser:', authUser);
-
-    if (!threadDetail || !threadDetail.id) {
+    const { detailThread, authUser } = getState();
+    console.log('asyncUpVoteThreadDetail called with threadDetail:', detailThread, 'and authUser:', authUser);
+ 
+    if (!detailThread || !detailThread.id) {
       console.error('Thread detail is not available or does not have an ID');
       return;
     }
-
+ 
     dispatch(upVoteThreadDetailActionCreator(authUser.id));
-
+ 
     try {
-      await api.upVoteThread(threadDetail.id);
+      await api.upVoteTalk(detailThread.id);
     } catch (error) {
       alert(error.message);
     }
   };
 }
-
+ 
 function asyncDownVoteThreadDetail() {
   return async (dispatch, getState) => {
-    const { threadDetail, authUser } = getState();
+    const { detailThread, authUser } = getState();
     dispatch(downVoteThreadDetailActionCreator(authUser.id));
-
+ 
     try {
-      await api.downVoteThread(threadDetail.id);
+      await api.downVoteTalk(detailThread.id);
     } catch (error) {
       alert(error.message);
     }
   };
 }
-
+ 
 function asyncNeutralizeVoteThreadDetail() {
   return async (dispatch, getState) => {
-    const { threadDetail, authUser } = getState();
+    const { detailThread, authUser } = getState();
     dispatch(neutralizeVoteThreadDetailActionCreator(authUser.id));
-
+ 
     try {
-      await api.neutralizeThreadVote(threadDetail.id);
+      await api.neutralizeTalkVote(detailThread.id);
     } catch (error) {
       alert(error.message);
     }
   };
 }
-
+ 
 function asyncCreateComment({ content }) {
   return async (dispatch, getState) => {
     dispatch(showLoading());
-    const { threadDetail } = getState();
-
+    const { detailThread } = getState();
+ 
     try {
       const comment = await api.createComment({
         content,
-        threadId: threadDetail.id,
+        threadId: detailThread.id,
       });
       dispatch(createCommentActionCreator(comment));
     } catch (error) {
@@ -166,46 +166,46 @@ function asyncCreateComment({ content }) {
     dispatch(hideLoading());
   };
 }
-
+ 
 function asyncUpVoteComment(commentId) {
   return async (dispatch, getState) => {
-    const { authUser, threadDetail } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(upVoteCommentActionCreator(commentId, authUser.id));
-
+ 
     try {
-      await api.upVoteComment(threadDetail.id, commentId);
+      await api.upVoteComment(detailThread.id, commentId);
     } catch (error) {
       alert(error.message);
     }
   };
 }
-
+ 
 function asyncDownVoteComment(commentId) {
   return async (dispatch, getState) => {
-    const { authUser, threadDetail } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(downVoteCommentActionCreator(commentId, authUser.id));
-
+ 
     try {
-      await api.downVoteComment(threadDetail.id, commentId);
+      await api.downVoteComment(detailThread.id, commentId);
     } catch (error) {
       alert(error.message);
     }
   };
 }
-
+ 
 function asyncNeutralizeVoteComment(commentId) {
   return async (dispatch, getState) => {
-    const { authUser, threadDetail } = getState();
+    const { authUser, detailThread } = getState();
     dispatch(neutralizeVoteCommentActionCreator(commentId, authUser.id));
-
+ 
     try {
-      await api.neutralVoteComment(threadDetail.id, commentId);
+      await api.neutralizeCommentVote(detailThread.id, commentId);
     } catch (error) {
       alert(error.message);
     }
   };
 }
-
+ 
 export {
   ActionType,
   asyncReceiveThreadDetail,
