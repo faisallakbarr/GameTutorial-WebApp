@@ -22,6 +22,11 @@ body {
   z-index: 1;
 }
 
+.scrollable-container {
+  overflow-y: auto;
+  max-height: 100vh; /* Ensure the container can scroll if its content exceeds the viewport height */
+}
+
 .image-wrapper img {
   position: relative;
   z-index: 0;

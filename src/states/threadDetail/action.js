@@ -12,11 +12,11 @@ const ActionType = {
   NEUTRALIZE_VOTE_COMMENT: 'NEUTRALIZE_VOTE_COMMENT',
 };
 
-function receiveThreadDetailActionCreator(threadDetail) {
+function receiveThreadDetailActionCreator(detailThread) {
   return {
     type: ActionType.RECEIVE_THREAD_DETAIL,
     payload: {
-      threadDetail,
+      detailThread,
     },
   };
 }
@@ -102,9 +102,17 @@ function asyncReceiveThreadDetail(threadId) {
   };
 }
 
+
 function asyncUpVoteThreadDetail() {
   return async (dispatch, getState) => {
     const { threadDetail, authUser } = getState();
+    console.log('asyncUpVoteThreadDetail called with threadDetail:', threadDetail, 'and authUser:', authUser);
+
+    if (!threadDetail || !threadDetail.id) {
+      console.error('Thread detail is not available or does not have an ID');
+      return;
+    }
+
     dispatch(upVoteThreadDetailActionCreator(authUser.id));
 
     try {

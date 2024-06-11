@@ -93,16 +93,26 @@ const videoData = [
     
 ]
 
-const getVideoData = () => {
+const getModuleVideoData = () => {
     return videoData.map((video, index) => ({
         id: index + 1,
         ...video
     }));
 };
 
+const getVideoData = (id) => {
+    const video = getVideoById(id);
+    if (!video) return [];
+    const result = [];
+    for (let i = 0; i < 8; i++) {
+        result.push(video);
+    }
+    return result;
+};
+
 const getVideoById = (id) => {
-    const videos = getVideoData();
+    const videos = getModuleVideoData();
     return videos.find(video => video.id === parseInt(id));
 };
 
-export { getVideoData, getVideoById };
+export { getModuleVideoData, getVideoById, getVideoData };

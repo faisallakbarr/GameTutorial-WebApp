@@ -10,7 +10,7 @@ const store = configureStore({
   reducer: {
     authUser: authUserReducer,
     isPreloader: isPreloadReducer,
-    threadDetail: threadDetailReducer,
+    detailThread: threadDetailReducer,
     threads: threadsReducer,
     users: usersReducer,
     loadingBar: loadingBarReducer,

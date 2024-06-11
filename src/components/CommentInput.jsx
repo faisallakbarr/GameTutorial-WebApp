@@ -1,11 +1,36 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import useInput from '../hooks/useInput';
 
-const CommentInput = () => {
+export default function CommentInput({ addComment }) {
+  const [comment, onCommentChange, setComment] = useInput('');
+
+  const onCommentSubmit = (event) => {
+    event.preventDefault();
+    addComment(comment);
+    setComment('');
+  };
   return (
-    <div>
-      
+    <div className="mt-3">
+      <h1 className="text-lg font-bold mb-3 text-white">Comment</h1>
+      <form>
+        <textarea
+          className="w-full min-h-32 border border-slate-200 outline-none p-1 rounded"
+          value={comment}
+          onChange={onCommentChange}
+        />
+        <button
+          type="submit"
+          className="w-full py-2 px-[4rem] rounded-full bg-blue-300 mt-3 hover:bg-blue-700 cursor-pointer"
+          onClick={onCommentSubmit}
+        >
+          Kirim
+        </button>
+      </form>
     </div>
-  )
+  );
 }
 
-export default CommentInput
+CommentInput.propTypes = {
+  addComment: PropTypes.func.isRequired,
+};

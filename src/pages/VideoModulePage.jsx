@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { getVideoData } from '../utils/video-data'
+import { getModuleVideoData } from '../utils/video-data'
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar'
 import VideoList from '../components/VideoList'
 
-const VideoPage = () => {
+const VideoModulePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [videos, setVideos] = useState([]);
   const [keyword, setKeyword] = useState(() => {
@@ -13,7 +13,7 @@ const VideoPage = () => {
 
   useEffect(() => {
     const fetchGameData = async () => {
-      const data = getVideoData();
+      const data = getModuleVideoData();
       setVideos(data);
     };
 
@@ -31,10 +31,11 @@ const VideoPage = () => {
         
 return (
     <div className='text-white m-8 '>
-      <h1 className='text-4xl font-bold'>Video Tutorials</h1>
+      <h1 className='text-4xl font-bold'>Video Module</h1>
       <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+      <VideoList videos={filteredVideos} />
     </div>
   )
 }
 
-export default VideoPage
+export default VideoModulePage

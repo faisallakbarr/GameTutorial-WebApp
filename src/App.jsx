@@ -16,6 +16,7 @@ import ForumAddPage from './pages/ForumAddPage';
 import { asyncCreateTalk } from './states/threads/action';
 import GameDetailPage from './pages/GameDetailPage';
 import ForumDetailPage from './pages/ForumDetailPage';
+import VideoModulePage from './pages/VideoModulePage';
 
 const App = () => {
   const {
@@ -62,10 +63,11 @@ const App = () => {
           <Routes>
             <Route path="/*" element={<HomePage authUser={authUser} />} />
             <Route path="/games/:id" element={<GameDetailPage />} />
-            <Route path="/video" element={<VideoPage />} />
-            <Route path="/videos/:id" element={<VideoDetailPage />} />
+            <Route path="/video" element={<VideoModulePage />} />
+            <Route path="/videos/:title" element={<VideoPage />} />
+            <Route path="/videos/:title/:id" element={<VideoDetailPage />} />
             <Route path="/forum" element={<ForumPage />} />
-            <Route path="/forum/:id" element={<ForumDetailPage />} />
+            <Route path="/forum/:threadId" element={<ForumDetailPage />} />
             <Route path="/forumAdd" element={<ForumAddPage />} />
           </Routes>
         </main>

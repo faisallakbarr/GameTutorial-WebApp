@@ -12,18 +12,22 @@ import {
   asyncCreateComment,
 } from '../states/threadDetail/action';
 import ForumDetail from '../components/ForumDetail';
+import CommentInput from '../components/CommentInput';
+import CommentList from '../components/CommentList';
 
 const ForumDetailPage = () => {
   const { threadId } = useParams();
-  const threadDetail = useSelector((state) => state.threadDetail);
+
+  const threadDetail = useSelector((state) => state.detailThread);
   const authUser = useSelector((state) => state.authUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(asyncReceiveThreadDetail(threadId));
+    if (threadId) {
+      dispatch(asyncReceiveThreadDetail(threadId));
+    }
   }, [threadId, dispatch]);
-  console.log(threadDetail)
-  console.log(threadId)
+  
   const onUpVoteThreadDetail = () => {
     dispatch(asyncUpVoteThreadDetail());
   };
@@ -55,10 +59,10 @@ const ForumDetailPage = () => {
   if (!threadDetail) {
     return null;
   }
-
+  
   return (
     <div>
-    <section className="detail-page">
+    <section className="detail-page overflow-y-auto">
     <div className="rounded-lg py-1 text-lg">
       <ForumDetail
         {...threadDetail}
@@ -66,6 +70,15 @@ const ForumDetailPage = () => {
         upVoteThreadDetail={onUpVoteThreadDetail}
         downVoteThreadDetail={onDownVoteThreadDetail}
         neutralizeVoteThreadDetail={onNeutralizeVoteThreadDetail}
+      />
+      <CommentInput addComment={onCommentSubmit} />
+
+      <CommentList
+        comments={threadDetail.comments}
+        authUser={authUser.id}
+        upVoteComment={onUpVoteComment}
+        downVoteComment={onDownVoteCommment}
+        neutralizeVoteComment={onNeutralizeVoteComment}
       />
     </div>
   </section>

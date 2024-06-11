@@ -17,21 +17,22 @@ export default function ForumDetail({
   neutralizeVoteThreadDetail,
   authUser,
 }) {
+  
   return (
     <section>
-      <div className="flex flex-col gap-2 justify-center">
+      <div className="flex flex-col gap-2 justify-center text-white mt-32">
         <header>
-          <span className="rounded-lg py-1 bg-blue-300 px-4 text-lg">
+          <span className="rounded-lg py-1 bg-blue-300 px-4 text-2xl">
             # {category}
           </span>
-          <h1 className="mt-5 font-bold">
+          <h1 className="mt-5 font-bold text-3xl">
             {title}
           </h1>
         </header>
-        <div>
+        <div className='text-xl max-w-1/2'>
           {body}
         </div>
-        <div className="flex items-center gap-3 mt-3">
+        <div className="flex items-center gap-3 mt-3 text-xl">
           <ForumVote
             id={id}
             authUser={authUser}
@@ -42,7 +43,7 @@ export default function ForumDetail({
             downVotesBy={downVotesBy}
           />
           <div className="flex flex-row items-center gap-3">
-            <p>Dibuat Oleh</p>
+            <p>Creator:</p>
             <img
               className="w-6 h-6 rounded-full"
               src={owner.avatar}
