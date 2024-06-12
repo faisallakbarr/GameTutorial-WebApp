@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
 import { MdDarkMode, MdLightMode, MdForum, MdVideoLibrary, MdLogout } from "react-icons/md";
+import { ThemeConsumer } from "../context/ThemeContext";
 
 function Sidebar({ authUser, onSignOut }) {
     // const [open, setOpen] = useState(true) //for minimize function
@@ -15,10 +16,11 @@ function Sidebar({ authUser, onSignOut }) {
         {title: "Home", icon: <IoMdHome />, link: "/"},
         {title: "Video Library", icon: <MdVideoLibrary />, link: "/video"},
         {title: "Forum", icon: <MdForum />, link: "/forum", gap: true},
-        {title: "Dark Mode", icon: <MdDarkMode />},
     ]
 
     return (
+        <ThemeConsumer>
+      {({ theme, toggleTheme }) => (
         <div 
         className="min-w-72 duration-300 h-screen bg-home-bg text-white pt-8 bg-relative"
         >
@@ -39,12 +41,18 @@ function Sidebar({ authUser, onSignOut }) {
                 </li>
             ))}
             <div className="text-grey-300 text-2xl flex items-center gap-x-4 cursor-pointer mx-3 p-2 py-3 hover:bg-nav-hover rounded-md">
+            {theme === 'light' ? <MdDarkMode /> : <MdLightMode />}
+            <button className="" type="button" onClick={toggleTheme}>{theme === 'light' ? 'Dark Mode': 'Light Mode'}</button>
+            </div>
+            <div className="text-grey-300 text-2xl flex items-center gap-x-4 cursor-pointer mx-3 p-2 py-3 hover:bg-nav-hover rounded-md">
             <MdLogout />
             <button className="" type="button" onClick={onSignOut}>Sign out</button>
             </div>
             </ul>
         </div>
-    );
+    )}
+        </ThemeConsumer>
+    )
 }
 
 Sidebar.propTypes = {

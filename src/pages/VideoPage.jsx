@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { getVideoData } from '../utils/video-data'
+import { getVideoData } from '../utils/mlbb-video-data'
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar'
-import VideoList from '../components/VideoList'
+import VideoSpecificList from '../components/VideoSpecificList'
 
 const VideoPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,6 +33,7 @@ return (
     <div className='text-white m-8 '>
       <h1 className='text-4xl font-bold'>Video Tutorials</h1>
       <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+      <VideoSpecificList videos={filteredVideos} />
     </div>
   )
 }

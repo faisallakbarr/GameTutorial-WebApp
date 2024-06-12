@@ -17,8 +17,32 @@ import { asyncCreateTalk } from './states/threads/action';
 import GameDetailPage from './pages/GameDetailPage';
 import ForumDetailPage from './pages/ForumDetailPage';
 import VideoModulePage from './pages/VideoModulePage';
+import {useState } from 'react';
+import { useMemo } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 
 const App = () => {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+        const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+        return newTheme;
+    })
+}
+
+const themeContext = useMemo(() => {
+    return {
+        theme,
+        toggleTheme
+    }
+}, [theme])
+
+useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+})
+
   const {
     authUser = null,
     isPreload = false
@@ -57,7 +81,8 @@ const App = () => {
   return (
     <>
       <Loading />
-      <div className="flex bg-home-bg">
+      <ThemeProvider value={themeContext}>
+      <div className="flex bg-home-bg" data-theme={theme}>
         <Sidebar authUser={authUser} onSignOut={onSignOut} />
         <main>
           <Routes>
@@ -72,6 +97,7 @@ const App = () => {
           </Routes>
         </main>
       </div>
+      </ThemeProvider>
     </>
   );
 };

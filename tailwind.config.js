@@ -20,7 +20,10 @@ export default {
       'nav-hover': '#df324f',
       'button1': '#e21d61',
       'button2': '#e15026',
-      'beginner': '#10b981'
+      'Beginner': '#10b981',
+      'Intermediate': '#f59e0b',
+      'Advanced': '#ef4444',
+      'Expert': '#AF47D2',
     },
     },
   },

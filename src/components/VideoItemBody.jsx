@@ -1,10 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { GiSandsOfTime } from "react-icons/gi";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 
-const VideoItemBody = ({title, desc, duration, videos}) => {
+const VideoItemBody = ({id, title, desc, duration, videos, locked}) => {
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (locked && !isSubscribed) {
+      alert('This content is locked. Please subscribe to unlock.');
+      navigate(`/videos/${title}`)
+    } else {
+      navigate(`/videos/${title}/${id}`)
+    }
+  };
   return (
-    <div className='bg-gray-200 min-h-28'>
+    <div className='bg-gray-200 min-h-28' onClick={handleClick}>
       <div className='p-7'>
         <h3 
         className='text-black font-semibold text-xl pb-4'
@@ -15,10 +27,6 @@ const VideoItemBody = ({title, desc, duration, videos}) => {
           <div className='flex items-center'>
             <GiSandsOfTime className='text-gray-600 text-xl' />
             <span className='ml-2'>{duration} hr</span>
-          </div>
-          <div className='flex items-center'>
-            <MdOutlineOndemandVideo className='text-gray-600 text-xl' />
-            <span className='ml-2'>{videos}</span>
           </div>
         </div>
       </div>

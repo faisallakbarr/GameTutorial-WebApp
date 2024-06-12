@@ -3,8 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   overflow: hidden;
+}
+
+[data-theme="light"] {
+  --background: #DDDDDD;
+  --suface: #FFFFFF;
+  --on-background: #333333;
+  --on-background-grey: #6d6d6d;
+  --on-surface: #333333;
 }
 
 .image-wrapper {

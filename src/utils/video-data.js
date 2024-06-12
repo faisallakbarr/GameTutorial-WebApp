@@ -17,7 +17,7 @@ const videoData = [
         title: "Mobile Legends",
         desc: "Tutorial Mobile Legends",
         duration: "4:13",
-        videos: "Easy"
+        videos: "7 videos"
     },
     {
         url: "https://youtu.be/aBSAMbldYtY?si=_hnvhLMHYUHHzLrf",
@@ -100,19 +100,9 @@ const getModuleVideoData = () => {
     }));
 };
 
-const getVideoData = (id) => {
-    const video = getVideoById(id);
-    if (!video) return [];
-    const result = [];
-    for (let i = 0; i < 8; i++) {
-        result.push(video);
-    }
-    return result;
-};
-
 const getVideoById = (id) => {
     const videos = getModuleVideoData();
     return videos.find(video => video.id === parseInt(id));
 };
 
-export { getModuleVideoData, getVideoById, getVideoData };
+export { getModuleVideoData, getVideoById };
